@@ -1,11 +1,12 @@
 package com.example.estoque.controller;
 
+import com.example.estoque.products.ProductRequestDTO;
+import com.example.estoque.products.ProductResponseDTO;
 import com.example.estoque.products.Products;
 import com.example.estoque.products.ProductsRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,11 +17,19 @@ public class ProductsController {
     @Autowired
     private ProductsRepository repository;
 
-    @GetMapping
-    //Select all
-    public List<Products> getAll(){
+    //salvar no banco
+    @PostMapping
+    public void SaveNewProduct(@RequestBody ProductRequestDTO data){
+        Products productData = new Products(data);
+        repository.save(productData);
 
-        List<Products> productsList = repository.findAll();
+    }
+
+    //Select all
+    @GetMapping
+    public List<ProductResponseDTO> GetAll(){
+
+        List<ProductResponseDTO> productsList = repository.findAll().stream().map(ProductResponseDTO::new).toList();
         return productsList;
     }
 
