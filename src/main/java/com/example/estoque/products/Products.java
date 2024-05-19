@@ -7,6 +7,7 @@ import org.hibernate.annotations.GeneratorType;
 
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
