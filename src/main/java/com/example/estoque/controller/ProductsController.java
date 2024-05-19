@@ -23,7 +23,7 @@ public class ProductsController {
     }
 
 
-    //salvar no banco
+    //Save
     @PostMapping
     @CrossOrigin(origins = "*", allowedHeaders = "*")//Restringe de onde vem as requisições
     public void SaveNewProduct(@RequestBody ProductRequestDTO data){
@@ -41,7 +41,7 @@ public class ProductsController {
         return productsList;
     }
 
-    //Atualizar
+    //Update
     @PutMapping("/{id}")
     @Transactional//garente o rollback dos dados caso ocorra algum erro durante a excução do metodo
     public void UpdateProduct(@PathVariable long id, @RequestBody ProductRequestDTO data){
@@ -53,6 +53,16 @@ public class ProductsController {
             product.setQuantidade(data.quantidade());
         }
 
+
+    }
+
+    //Delete
+    @DeleteMapping("/{id}")
+    public void DeleteProduct(@PathVariable long id){
+        Optional<Products> productData = repository.findById(id);
+        if(productData.isPresent()){
+            repository.delete(productData.get());
+        }
 
     }
 
