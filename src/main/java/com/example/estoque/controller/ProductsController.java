@@ -58,7 +58,7 @@ public class ProductsController {
     }
 
     //Delete
-
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @DeleteMapping("/{id}")
     public void DeleteProduct(@PathVariable long id){
         Optional<Products> productData = repository.findById(id);
