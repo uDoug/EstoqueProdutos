@@ -42,6 +42,7 @@ public class ProductsController {
     }
 
     //Update
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PutMapping("/{id}")
     @Transactional//garente o rollback dos dados caso ocorra algum erro durante a excução do metodo
     public void UpdateProduct(@PathVariable long id, @RequestBody ProductRequestDTO data){
@@ -57,6 +58,7 @@ public class ProductsController {
     }
 
     //Delete
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @DeleteMapping("/{id}")
     public void DeleteProduct(@PathVariable long id){
         Optional<Products> productData = repository.findById(id);
